@@ -1,0 +1,22 @@
+[project]
+name = "signbridge"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "black>=26.3.1",
+    "googletrans==4.0.0rc1",
+    "ipython<9",
+    "jupyter<2",
+    "matplotlib>=3.10.8",
+    "mediapipe==0.10.9",
+    "numpy>=2.4.3",
+    "opencv-python>=4.13.0.92",
+    "pyttsx3>=2.99",
+    "scikit-learn>=1.8.0",
+    "torch>=2.10.0",
+    "torchaudio>=2.10.0",
+    "torchvision>=0.25.0",
+    "tqdm>=4.67.3",
+]
