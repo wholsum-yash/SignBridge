@@ -1,5 +1,5 @@
 def main():
-    print("Hello from signbridge!")
+    print("Welcome to SignBridge!")
 
 
 if __name__ == "__main__":
