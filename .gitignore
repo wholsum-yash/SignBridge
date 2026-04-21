@@ -1,5 +1,9 @@
 .venv/
 __pycache__/
-*.pyc
+* .pyc
 .ipynb_checkpoints/
-WLASL-dataset/
+WLASL-complete/
+* .npy
+Scripts/dataset/
+models/
+

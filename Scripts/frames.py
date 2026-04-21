@@ -2,7 +2,7 @@ import cv2
 
 
 # extracting frames
-def extract_frames(video_path, seq_len=30):
+def extract_frames(video_path, seq_len=32):
     cap = cv2.VideoCapture(video_path)
 
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
