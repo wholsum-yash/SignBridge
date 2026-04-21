@@ -1,11 +1,8 @@
 import json
 import os
-<<<<<<< Updated upstream
 
-=======
 import numpy as np
 from augment import augment_sequence
->>>>>>> Stashed changes
 from frames import extract_frames
 from landmarks import get_landmarks, repair_frames # pyright: ignore[reportAttributeAccessIssue]
 from clean_dataset import validate_sequence
@@ -48,11 +45,9 @@ for entry in data:
 # Your Path to dataset videos as BASE_PATH
 BASE_PATH = "/home/wholsum/projects/SignBridge/WLASL-complete/videos/"
 
-<<<<<<< Updated upstream
-for entry in filtered[:3]:
+for entry in filtered:
     label = entry["gloss"].lower()
 
-=======
 for label in TARGET_WORDS:
     os.makedirs(f"dataset/{label}", exist_ok= True)
 
@@ -68,7 +63,6 @@ for entry in filtered:
     if counters[label] >= MAX_SAMPLES_PER_CLASS:
         continue
 
->>>>>>> Stashed changes
     for inst in entry["instances"]:
 
         if counters[label] >= MAX_SAMPLES_PER_CLASS:
@@ -76,8 +70,6 @@ for entry in filtered:
         video_id = inst["video_id"]
         video_path = f"{BASE_PATH}/{video_id}.mp4"
 
-        # print(video_path)
-        # print(os.path.exists(video_path))
 
         # Skip missing files in the dataset
         if not os.path.exists(video_path):
@@ -94,12 +86,6 @@ for entry in filtered:
         # Repair broken frames using landmarks.py
         sequence, repaired_count = repair_frames(sequence)
 
-<<<<<<< Updated upstream
-        x.append(sequence)
-        y.append(label)
-print(len(x))
-print(len(y))
-=======
         total_frames = len(sequence)
 
         if total_frames == 0:
@@ -164,4 +150,3 @@ print(f"Total number of classes: {len(TARGET_WORDS)}")
 for label in TARGET_WORDS:
     print(f"{label}: {counters[label]} .npy files saved")
 print(f"Total samples saved: {sum(counters.values())}")
->>>>>>> Stashed changes
