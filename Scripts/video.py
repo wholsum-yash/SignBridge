@@ -64,6 +64,9 @@ while True:
         else:
             predictions.append(None)
 
+        final_pred = None
+
+        # smoothing
         if len(predictions) == 10:
             valid_preds = [p for p in predictions if p is not None]
 
@@ -73,20 +76,8 @@ while True:
                 if valid_preds.count(most_common) > 7:
                     final_pred = most_common
 
-        if final_pred is not None: # pyright: ignore[reportPossiblyUnboundVariable]
-            print(f"Pred: {actions[final_pred]} | Conf: {confidence:.2f}") # pyright: ignore[reportPossiblyUnboundVariable]
-
-        # smoothing
-        final_pred = None
-
-        if len(predictions) == 10:
-            valid_preds = [p for p in predictions if p is not None]
-
-            if len(valid_preds) > 0:
-                most_common = max(set(valid_preds), key=valid_preds.count)
-
-                if valid_preds.count(most_common) > 7:
-                    final_pred = most_common
+        if final_pred is not None: 
+            print(f"Pred: {actions[final_pred]} | Conf: {confidence:.2f}") 
 
         # display
         if final_pred is not None:
