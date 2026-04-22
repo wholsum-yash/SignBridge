@@ -179,7 +179,7 @@ def compute_spatial_features(center, face, neck):
 # Getting Mediapipe Landmarks
 def get_landmarks(frame):
 
-    """ Main feature extraction pipeline; Converts frames into fixed length feature vectors of dim(148) """
+    """ Main feature extraction pipeline; Converts frames into fixed length feature vectors of dim(144) """
     
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 

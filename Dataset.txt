@@ -1,4 +1,4 @@
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
 38482 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_000_aug0.npy
 Saving to: dataset/no/sample_000_aug1.npy
@@ -6,167 +6,175 @@ Saving to: dataset/no/sample_000_aug2.npy
 Saving to: dataset/no/sample_000_aug3.npy
 Saving to: dataset/no/sample_000_aug4.npy
 Saving to: dataset/no/sample_000_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-69411 → valid: 1.00, diversity: 0.75, repair: 0.25
+[DEBUG] Sequence shape before validation: (32, 144)
+69411 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_001_aug0.npy
 Saving to: dataset/no/sample_001_aug1.npy
 Saving to: dataset/no/sample_001_aug2.npy
 Saving to: dataset/no/sample_001_aug3.npy
 Saving to: dataset/no/sample_001_aug4.npy
 Saving to: dataset/no/sample_001_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-68110 → valid: 1.00, diversity: 0.75, repair: 0.25
+[DEBUG] Sequence shape before validation: (32, 144)
+68110 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_002_aug0.npy
 Saving to: dataset/no/sample_002_aug1.npy
 Saving to: dataset/no/sample_002_aug2.npy
 Saving to: dataset/no/sample_002_aug3.npy
 Saving to: dataset/no/sample_002_aug4.npy
 Saving to: dataset/no/sample_002_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-68406 → valid: 1.00, diversity: 0.94, repair: 0.06
+[DEBUG] Sequence shape before validation: (32, 144)
+68406 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_003_aug0.npy
 Saving to: dataset/no/sample_003_aug1.npy
 Saving to: dataset/no/sample_003_aug2.npy
 Saving to: dataset/no/sample_003_aug3.npy
 Saving to: dataset/no/sample_003_aug4.npy
 Saving to: dataset/no/sample_003_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38539 → valid: 1.00, diversity: 0.41, repair: 0.59
+[DEBUG] Sequence shape before validation: (32, 144)
+38539 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_004_aug0.npy
 Saving to: dataset/no/sample_004_aug1.npy
 Saving to: dataset/no/sample_004_aug2.npy
 Saving to: dataset/no/sample_004_aug3.npy
 Saving to: dataset/no/sample_004_aug4.npy
 Saving to: dataset/no/sample_004_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38540 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+38540 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_005_aug0.npy
 Saving to: dataset/no/sample_005_aug1.npy
 Saving to: dataset/no/sample_005_aug2.npy
 Saving to: dataset/no/sample_005_aug3.npy
 Saving to: dataset/no/sample_005_aug4.npy
 Saving to: dataset/no/sample_005_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38541 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+38541 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_006_aug0.npy
 Saving to: dataset/no/sample_006_aug1.npy
 Saving to: dataset/no/sample_006_aug2.npy
 Saving to: dataset/no/sample_006_aug3.npy
 Saving to: dataset/no/sample_006_aug4.npy
 Saving to: dataset/no/sample_006_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38542 → valid: 1.00, diversity: 0.75, repair: 0.25
+[DEBUG] Sequence shape before validation: (32, 144)
+38542 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_007_aug0.npy
 Saving to: dataset/no/sample_007_aug1.npy
 Saving to: dataset/no/sample_007_aug2.npy
 Saving to: dataset/no/sample_007_aug3.npy
 Saving to: dataset/no/sample_007_aug4.npy
 Saving to: dataset/no/sample_007_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38525 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+38525 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_008_aug0.npy
 Saving to: dataset/no/sample_008_aug1.npy
 Saving to: dataset/no/sample_008_aug2.npy
 Saving to: dataset/no/sample_008_aug3.npy
 Saving to: dataset/no/sample_008_aug4.npy
 Saving to: dataset/no/sample_008_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38544 → valid: 1.00, diversity: 0.34, repair: 0.66
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
-38527 → valid: 1.00, diversity: 0.84, repair: 0.16
+[DEBUG] Sequence shape before validation: (32, 144)
+38544 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_009_aug0.npy
 Saving to: dataset/no/sample_009_aug1.npy
 Saving to: dataset/no/sample_009_aug2.npy
 Saving to: dataset/no/sample_009_aug3.npy
 Saving to: dataset/no/sample_009_aug4.npy
 Saving to: dataset/no/sample_009_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38529 → valid: 1.00, diversity: 0.75, repair: 0.25
+[DEBUG] Sequence shape before validation: (32, 144)
+38527 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_010_aug0.npy
 Saving to: dataset/no/sample_010_aug1.npy
 Saving to: dataset/no/sample_010_aug2.npy
 Saving to: dataset/no/sample_010_aug3.npy
 Saving to: dataset/no/sample_010_aug4.npy
 Saving to: dataset/no/sample_010_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38530 → valid: 1.00, diversity: 0.94, repair: 0.06
+[DEBUG] Sequence shape before validation: (32, 144)
+38529 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_011_aug0.npy
 Saving to: dataset/no/sample_011_aug1.npy
 Saving to: dataset/no/sample_011_aug2.npy
 Saving to: dataset/no/sample_011_aug3.npy
 Saving to: dataset/no/sample_011_aug4.npy
 Saving to: dataset/no/sample_011_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38531 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+38530 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_012_aug0.npy
 Saving to: dataset/no/sample_012_aug1.npy
 Saving to: dataset/no/sample_012_aug2.npy
 Saving to: dataset/no/sample_012_aug3.npy
 Saving to: dataset/no/sample_012_aug4.npy
 Saving to: dataset/no/sample_012_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38532 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+38531 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_013_aug0.npy
 Saving to: dataset/no/sample_013_aug1.npy
 Saving to: dataset/no/sample_013_aug2.npy
 Saving to: dataset/no/sample_013_aug3.npy
 Saving to: dataset/no/sample_013_aug4.npy
 Saving to: dataset/no/sample_013_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38533 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+38532 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_014_aug0.npy
 Saving to: dataset/no/sample_014_aug1.npy
 Saving to: dataset/no/sample_014_aug2.npy
 Saving to: dataset/no/sample_014_aug3.npy
 Saving to: dataset/no/sample_014_aug4.npy
 Saving to: dataset/no/sample_014_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-66183 → valid: 1.00, diversity: 0.59, repair: 0.41
+[DEBUG] Sequence shape before validation: (32, 144)
+38533 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_015_aug0.npy
 Saving to: dataset/no/sample_015_aug1.npy
 Saving to: dataset/no/sample_015_aug2.npy
 Saving to: dataset/no/sample_015_aug3.npy
 Saving to: dataset/no/sample_015_aug4.npy
 Saving to: dataset/no/sample_015_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38524 → valid: 1.00, diversity: 0.31, repair: 0.69
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
-67934 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+66183 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_016_aug0.npy
 Saving to: dataset/no/sample_016_aug1.npy
 Saving to: dataset/no/sample_016_aug2.npy
 Saving to: dataset/no/sample_016_aug3.npy
 Saving to: dataset/no/sample_016_aug4.npy
 Saving to: dataset/no/sample_016_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38534 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+38524 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_017_aug0.npy
 Saving to: dataset/no/sample_017_aug1.npy
 Saving to: dataset/no/sample_017_aug2.npy
 Saving to: dataset/no/sample_017_aug3.npy
 Saving to: dataset/no/sample_017_aug4.npy
 Saving to: dataset/no/sample_017_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38536 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+67934 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_018_aug0.npy
 Saving to: dataset/no/sample_018_aug1.npy
 Saving to: dataset/no/sample_018_aug2.npy
 Saving to: dataset/no/sample_018_aug3.npy
 Saving to: dataset/no/sample_018_aug4.npy
 Saving to: dataset/no/sample_018_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-38538 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+38534 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/no/sample_019_aug0.npy
 Saving to: dataset/no/sample_019_aug1.npy
 Saving to: dataset/no/sample_019_aug2.npy
 Saving to: dataset/no/sample_019_aug3.npy
 Saving to: dataset/no/sample_019_aug4.npy
 Saving to: dataset/no/sample_019_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
+38536 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/no/sample_020_aug0.npy
+Saving to: dataset/no/sample_020_aug1.npy
+Saving to: dataset/no/sample_020_aug2.npy
+Saving to: dataset/no/sample_020_aug3.npy
+Saving to: dataset/no/sample_020_aug4.npy
+Saving to: dataset/no/sample_020_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
+38538 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/no/sample_021_aug0.npy
+Saving to: dataset/no/sample_021_aug1.npy
+Saving to: dataset/no/sample_021_aug2.npy
+Saving to: dataset/no/sample_021_aug3.npy
+Saving to: dataset/no/sample_021_aug4.npy
+Saving to: dataset/no/sample_021_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
 64275 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_000_aug0.npy
 Saving to: dataset/yes/sample_000_aug1.npy
@@ -174,31 +182,31 @@ Saving to: dataset/yes/sample_000_aug2.npy
 Saving to: dataset/yes/sample_000_aug3.npy
 Saving to: dataset/yes/sample_000_aug4.npy
 Saving to: dataset/yes/sample_000_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-69546 → valid: 1.00, diversity: 0.81, repair: 0.19
+[DEBUG] Sequence shape before validation: (32, 144)
+69546 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_001_aug0.npy
 Saving to: dataset/yes/sample_001_aug1.npy
 Saving to: dataset/yes/sample_001_aug2.npy
 Saving to: dataset/yes/sample_001_aug3.npy
 Saving to: dataset/yes/sample_001_aug4.npy
 Saving to: dataset/yes/sample_001_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64287 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+64287 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_002_aug0.npy
 Saving to: dataset/yes/sample_002_aug1.npy
 Saving to: dataset/yes/sample_002_aug2.npy
 Saving to: dataset/yes/sample_002_aug3.npy
 Saving to: dataset/yes/sample_002_aug4.npy
 Saving to: dataset/yes/sample_002_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-68192 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+68192 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_003_aug0.npy
 Saving to: dataset/yes/sample_003_aug1.npy
 Saving to: dataset/yes/sample_003_aug2.npy
 Saving to: dataset/yes/sample_003_aug3.npy
 Saving to: dataset/yes/sample_003_aug4.npy
 Saving to: dataset/yes/sample_003_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
 64290 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_004_aug0.npy
 Saving to: dataset/yes/sample_004_aug1.npy
@@ -206,131 +214,143 @@ Saving to: dataset/yes/sample_004_aug2.npy
 Saving to: dataset/yes/sample_004_aug3.npy
 Saving to: dataset/yes/sample_004_aug4.npy
 Saving to: dataset/yes/sample_004_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64284 → valid: 1.00, diversity: 0.84, repair: 0.16
+[DEBUG] Sequence shape before validation: (32, 144)
+64284 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_005_aug0.npy
 Saving to: dataset/yes/sample_005_aug1.npy
 Saving to: dataset/yes/sample_005_aug2.npy
 Saving to: dataset/yes/sample_005_aug3.npy
 Saving to: dataset/yes/sample_005_aug4.npy
 Saving to: dataset/yes/sample_005_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64291 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+64291 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_006_aug0.npy
 Saving to: dataset/yes/sample_006_aug1.npy
 Saving to: dataset/yes/sample_006_aug2.npy
 Saving to: dataset/yes/sample_006_aug3.npy
 Saving to: dataset/yes/sample_006_aug4.npy
 Saving to: dataset/yes/sample_006_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64292 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+64292 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_007_aug0.npy
 Saving to: dataset/yes/sample_007_aug1.npy
 Saving to: dataset/yes/sample_007_aug2.npy
 Saving to: dataset/yes/sample_007_aug3.npy
 Saving to: dataset/yes/sample_007_aug4.npy
 Saving to: dataset/yes/sample_007_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64293 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+64293 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_008_aug0.npy
 Saving to: dataset/yes/sample_008_aug1.npy
 Saving to: dataset/yes/sample_008_aug2.npy
 Saving to: dataset/yes/sample_008_aug3.npy
 Saving to: dataset/yes/sample_008_aug4.npy
 Saving to: dataset/yes/sample_008_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64294 → valid: 1.00, diversity: 0.66, repair: 0.34
+[DEBUG] Sequence shape before validation: (32, 144)
+64294 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_009_aug0.npy
 Saving to: dataset/yes/sample_009_aug1.npy
 Saving to: dataset/yes/sample_009_aug2.npy
 Saving to: dataset/yes/sample_009_aug3.npy
 Saving to: dataset/yes/sample_009_aug4.npy
 Saving to: dataset/yes/sample_009_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64295 → valid: 1.00, diversity: 0.81, repair: 0.19
+[DEBUG] Sequence shape before validation: (32, 144)
+64295 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_010_aug0.npy
 Saving to: dataset/yes/sample_010_aug1.npy
 Saving to: dataset/yes/sample_010_aug2.npy
 Saving to: dataset/yes/sample_010_aug3.npy
 Saving to: dataset/yes/sample_010_aug4.npy
 Saving to: dataset/yes/sample_010_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64296 → valid: 1.00, diversity: 0.28, repair: 0.72
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
-66820 → valid: 1.00, diversity: 0.75, repair: 0.25
+[DEBUG] Sequence shape before validation: (32, 144)
+64296 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_011_aug0.npy
 Saving to: dataset/yes/sample_011_aug1.npy
 Saving to: dataset/yes/sample_011_aug2.npy
 Saving to: dataset/yes/sample_011_aug3.npy
 Saving to: dataset/yes/sample_011_aug4.npy
 Saving to: dataset/yes/sample_011_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64297 → valid: 1.00, diversity: 0.78, repair: 0.22
+[DEBUG] Sequence shape before validation: (32, 144)
+66820 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_012_aug0.npy
 Saving to: dataset/yes/sample_012_aug1.npy
 Saving to: dataset/yes/sample_012_aug2.npy
 Saving to: dataset/yes/sample_012_aug3.npy
 Saving to: dataset/yes/sample_012_aug4.npy
 Saving to: dataset/yes/sample_012_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64280 → valid: 1.00, diversity: 0.56, repair: 0.44
+[DEBUG] Sequence shape before validation: (32, 144)
+64297 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_013_aug0.npy
 Saving to: dataset/yes/sample_013_aug1.npy
 Saving to: dataset/yes/sample_013_aug2.npy
 Saving to: dataset/yes/sample_013_aug3.npy
 Saving to: dataset/yes/sample_013_aug4.npy
 Saving to: dataset/yes/sample_013_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64298 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+64280 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_014_aug0.npy
 Saving to: dataset/yes/sample_014_aug1.npy
 Saving to: dataset/yes/sample_014_aug2.npy
 Saving to: dataset/yes/sample_014_aug3.npy
 Saving to: dataset/yes/sample_014_aug4.npy
 Saving to: dataset/yes/sample_014_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64299 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+64298 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_015_aug0.npy
 Saving to: dataset/yes/sample_015_aug1.npy
 Saving to: dataset/yes/sample_015_aug2.npy
 Saving to: dataset/yes/sample_015_aug3.npy
 Saving to: dataset/yes/sample_015_aug4.npy
 Saving to: dataset/yes/sample_015_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64300 → valid: 1.00, diversity: 0.53, repair: 0.47
+[DEBUG] Sequence shape before validation: (32, 144)
+64299 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_016_aug0.npy
 Saving to: dataset/yes/sample_016_aug1.npy
 Saving to: dataset/yes/sample_016_aug2.npy
 Saving to: dataset/yes/sample_016_aug3.npy
 Saving to: dataset/yes/sample_016_aug4.npy
 Saving to: dataset/yes/sample_016_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64281 → valid: 1.00, diversity: 0.31, repair: 0.69
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
-64288 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+64300 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_017_aug0.npy
 Saving to: dataset/yes/sample_017_aug1.npy
 Saving to: dataset/yes/sample_017_aug2.npy
 Saving to: dataset/yes/sample_017_aug3.npy
 Saving to: dataset/yes/sample_017_aug4.npy
 Saving to: dataset/yes/sample_017_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64289 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+64281 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/yes/sample_018_aug0.npy
 Saving to: dataset/yes/sample_018_aug1.npy
 Saving to: dataset/yes/sample_018_aug2.npy
 Saving to: dataset/yes/sample_018_aug3.npy
 Saving to: dataset/yes/sample_018_aug4.npy
 Saving to: dataset/yes/sample_018_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-64283 → valid: 1.00, diversity: 0.34, repair: 0.66
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
+64288 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/yes/sample_019_aug0.npy
+Saving to: dataset/yes/sample_019_aug1.npy
+Saving to: dataset/yes/sample_019_aug2.npy
+Saving to: dataset/yes/sample_019_aug3.npy
+Saving to: dataset/yes/sample_019_aug4.npy
+Saving to: dataset/yes/sample_019_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
+64289 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/yes/sample_020_aug0.npy
+Saving to: dataset/yes/sample_020_aug1.npy
+Saving to: dataset/yes/sample_020_aug2.npy
+Saving to: dataset/yes/sample_020_aug3.npy
+Saving to: dataset/yes/sample_020_aug4.npy
+Saving to: dataset/yes/sample_020_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
+64283 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/yes/sample_021_aug0.npy
+Saving to: dataset/yes/sample_021_aug1.npy
+Saving to: dataset/yes/sample_021_aug2.npy
+Saving to: dataset/yes/sample_021_aug3.npy
+Saving to: dataset/yes/sample_021_aug4.npy
+Saving to: dataset/yes/sample_021_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
 62077 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_000_aug0.npy
 Saving to: dataset/wait/sample_000_aug1.npy
@@ -338,187 +358,191 @@ Saving to: dataset/wait/sample_000_aug2.npy
 Saving to: dataset/wait/sample_000_aug3.npy
 Saving to: dataset/wait/sample_000_aug4.npy
 Saving to: dataset/wait/sample_000_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62113 → valid: 1.00, diversity: 0.50, repair: 0.50
+[DEBUG] Sequence shape before validation: (32, 144)
+62113 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_001_aug0.npy
 Saving to: dataset/wait/sample_001_aug1.npy
 Saving to: dataset/wait/sample_001_aug2.npy
 Saving to: dataset/wait/sample_001_aug3.npy
 Saving to: dataset/wait/sample_001_aug4.npy
 Saving to: dataset/wait/sample_001_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62098 → valid: 1.00, diversity: 0.72, repair: 0.28
+[DEBUG] Sequence shape before validation: (32, 144)
+62098 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_002_aug0.npy
 Saving to: dataset/wait/sample_002_aug1.npy
 Saving to: dataset/wait/sample_002_aug2.npy
 Saving to: dataset/wait/sample_002_aug3.npy
 Saving to: dataset/wait/sample_002_aug4.npy
 Saving to: dataset/wait/sample_002_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62100 → valid: 1.00, diversity: 0.62, repair: 0.38
+[DEBUG] Sequence shape before validation: (32, 144)
+62100 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_003_aug0.npy
 Saving to: dataset/wait/sample_003_aug1.npy
 Saving to: dataset/wait/sample_003_aug2.npy
 Saving to: dataset/wait/sample_003_aug3.npy
 Saving to: dataset/wait/sample_003_aug4.npy
 Saving to: dataset/wait/sample_003_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62101 → valid: 1.00, diversity: 0.72, repair: 0.28
+[DEBUG] Sequence shape before validation: (32, 144)
+62101 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_004_aug0.npy
 Saving to: dataset/wait/sample_004_aug1.npy
 Saving to: dataset/wait/sample_004_aug2.npy
 Saving to: dataset/wait/sample_004_aug3.npy
 Saving to: dataset/wait/sample_004_aug4.npy
 Saving to: dataset/wait/sample_004_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62102 → valid: 1.00, diversity: 0.88, repair: 0.12
+[DEBUG] Sequence shape before validation: (32, 144)
+62102 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_005_aug0.npy
 Saving to: dataset/wait/sample_005_aug1.npy
 Saving to: dataset/wait/sample_005_aug2.npy
 Saving to: dataset/wait/sample_005_aug3.npy
 Saving to: dataset/wait/sample_005_aug4.npy
 Saving to: dataset/wait/sample_005_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62103 → valid: 1.00, diversity: 0.78, repair: 0.22
+[DEBUG] Sequence shape before validation: (32, 144)
+62103 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_006_aug0.npy
 Saving to: dataset/wait/sample_006_aug1.npy
 Saving to: dataset/wait/sample_006_aug2.npy
 Saving to: dataset/wait/sample_006_aug3.npy
 Saving to: dataset/wait/sample_006_aug4.npy
 Saving to: dataset/wait/sample_006_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62104 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+62104 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_007_aug0.npy
 Saving to: dataset/wait/sample_007_aug1.npy
 Saving to: dataset/wait/sample_007_aug2.npy
 Saving to: dataset/wait/sample_007_aug3.npy
 Saving to: dataset/wait/sample_007_aug4.npy
 Saving to: dataset/wait/sample_007_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62105 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+62105 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_008_aug0.npy
 Saving to: dataset/wait/sample_008_aug1.npy
 Saving to: dataset/wait/sample_008_aug2.npy
 Saving to: dataset/wait/sample_008_aug3.npy
 Saving to: dataset/wait/sample_008_aug4.npy
 Saving to: dataset/wait/sample_008_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62106 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+62106 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_009_aug0.npy
 Saving to: dataset/wait/sample_009_aug1.npy
 Saving to: dataset/wait/sample_009_aug2.npy
 Saving to: dataset/wait/sample_009_aug3.npy
 Saving to: dataset/wait/sample_009_aug4.npy
 Saving to: dataset/wait/sample_009_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-66740 → valid: 1.00, diversity: 0.44, repair: 0.56
+[DEBUG] Sequence shape before validation: (32, 144)
+66740 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_010_aug0.npy
 Saving to: dataset/wait/sample_010_aug1.npy
 Saving to: dataset/wait/sample_010_aug2.npy
 Saving to: dataset/wait/sample_010_aug3.npy
 Saving to: dataset/wait/sample_010_aug4.npy
 Saving to: dataset/wait/sample_010_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62097 → valid: 1.00, diversity: 0.34, repair: 0.66
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
-67034 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+62097 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_011_aug0.npy
 Saving to: dataset/wait/sample_011_aug1.npy
 Saving to: dataset/wait/sample_011_aug2.npy
 Saving to: dataset/wait/sample_011_aug3.npy
 Saving to: dataset/wait/sample_011_aug4.npy
 Saving to: dataset/wait/sample_011_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62107 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+67034 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_012_aug0.npy
 Saving to: dataset/wait/sample_012_aug1.npy
 Saving to: dataset/wait/sample_012_aug2.npy
 Saving to: dataset/wait/sample_012_aug3.npy
 Saving to: dataset/wait/sample_012_aug4.npy
 Saving to: dataset/wait/sample_012_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62109 → valid: 1.00, diversity: 0.59, repair: 0.41
+[DEBUG] Sequence shape before validation: (32, 144)
+62107 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_013_aug0.npy
 Saving to: dataset/wait/sample_013_aug1.npy
 Saving to: dataset/wait/sample_013_aug2.npy
 Saving to: dataset/wait/sample_013_aug3.npy
 Saving to: dataset/wait/sample_013_aug4.npy
 Saving to: dataset/wait/sample_013_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62110 → valid: 1.00, diversity: 0.62, repair: 0.38
+[DEBUG] Sequence shape before validation: (32, 144)
+62109 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_014_aug0.npy
 Saving to: dataset/wait/sample_014_aug1.npy
 Saving to: dataset/wait/sample_014_aug2.npy
 Saving to: dataset/wait/sample_014_aug3.npy
 Saving to: dataset/wait/sample_014_aug4.npy
 Saving to: dataset/wait/sample_014_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62111 → valid: 1.00, diversity: 0.53, repair: 0.47
+[DEBUG] Sequence shape before validation: (32, 144)
+62110 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_015_aug0.npy
 Saving to: dataset/wait/sample_015_aug1.npy
 Saving to: dataset/wait/sample_015_aug2.npy
 Saving to: dataset/wait/sample_015_aug3.npy
 Saving to: dataset/wait/sample_015_aug4.npy
 Saving to: dataset/wait/sample_015_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-62112 → valid: 1.00, diversity: 0.72, repair: 0.28
+[DEBUG] Sequence shape before validation: (32, 144)
+62111 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/wait/sample_016_aug0.npy
 Saving to: dataset/wait/sample_016_aug1.npy
 Saving to: dataset/wait/sample_016_aug2.npy
 Saving to: dataset/wait/sample_016_aug3.npy
 Saving to: dataset/wait/sample_016_aug4.npy
 Saving to: dataset/wait/sample_016_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04694 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+62112 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/wait/sample_017_aug0.npy
+Saving to: dataset/wait/sample_017_aug1.npy
+Saving to: dataset/wait/sample_017_aug2.npy
+Saving to: dataset/wait/sample_017_aug3.npy
+Saving to: dataset/wait/sample_017_aug4.npy
+Saving to: dataset/wait/sample_017_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
+04694 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_000_aug0.npy
 Saving to: dataset/bad/sample_000_aug1.npy
 Saving to: dataset/bad/sample_000_aug2.npy
 Saving to: dataset/bad/sample_000_aug3.npy
 Saving to: dataset/bad/sample_000_aug4.npy
 Saving to: dataset/bad/sample_000_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-69219 → valid: 1.00, diversity: 0.78, repair: 0.22
+[DEBUG] Sequence shape before validation: (32, 144)
+69219 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_001_aug0.npy
 Saving to: dataset/bad/sample_001_aug1.npy
 Saving to: dataset/bad/sample_001_aug2.npy
 Saving to: dataset/bad/sample_001_aug3.npy
 Saving to: dataset/bad/sample_001_aug4.npy
 Saving to: dataset/bad/sample_001_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04709 → valid: 1.00, diversity: 0.66, repair: 0.34
+[DEBUG] Sequence shape before validation: (32, 144)
+04709 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_002_aug0.npy
 Saving to: dataset/bad/sample_002_aug1.npy
 Saving to: dataset/bad/sample_002_aug2.npy
 Saving to: dataset/bad/sample_002_aug3.npy
 Saving to: dataset/bad/sample_002_aug4.npy
 Saving to: dataset/bad/sample_002_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04712 → valid: 1.00, diversity: 0.50, repair: 0.50
+[DEBUG] Sequence shape before validation: (32, 144)
+04712 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_003_aug0.npy
 Saving to: dataset/bad/sample_003_aug1.npy
 Saving to: dataset/bad/sample_003_aug2.npy
 Saving to: dataset/bad/sample_003_aug3.npy
 Saving to: dataset/bad/sample_003_aug4.npy
 Saving to: dataset/bad/sample_003_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04713 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+04713 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_004_aug0.npy
 Saving to: dataset/bad/sample_004_aug1.npy
 Saving to: dataset/bad/sample_004_aug2.npy
 Saving to: dataset/bad/sample_004_aug3.npy
 Saving to: dataset/bad/sample_004_aug4.npy
 Saving to: dataset/bad/sample_004_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04715 → valid: 1.00, diversity: 0.72, repair: 0.28
+[DEBUG] Sequence shape before validation: (32, 144)
+04715 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_005_aug0.npy
 Saving to: dataset/bad/sample_005_aug1.npy
 Saving to: dataset/bad/sample_005_aug2.npy
 Saving to: dataset/bad/sample_005_aug3.npy
 Saving to: dataset/bad/sample_005_aug4.npy
 Saving to: dataset/bad/sample_005_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
 04716 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_006_aug0.npy
 Saving to: dataset/bad/sample_006_aug1.npy
@@ -526,7 +550,7 @@ Saving to: dataset/bad/sample_006_aug2.npy
 Saving to: dataset/bad/sample_006_aug3.npy
 Saving to: dataset/bad/sample_006_aug4.npy
 Saving to: dataset/bad/sample_006_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
 04717 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_007_aug0.npy
 Saving to: dataset/bad/sample_007_aug1.npy
@@ -534,31 +558,31 @@ Saving to: dataset/bad/sample_007_aug2.npy
 Saving to: dataset/bad/sample_007_aug3.npy
 Saving to: dataset/bad/sample_007_aug4.npy
 Saving to: dataset/bad/sample_007_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-65125 → valid: 1.00, diversity: 0.78, repair: 0.22
+[DEBUG] Sequence shape before validation: (32, 144)
+65125 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_008_aug0.npy
 Saving to: dataset/bad/sample_008_aug1.npy
 Saving to: dataset/bad/sample_008_aug2.npy
 Saving to: dataset/bad/sample_008_aug3.npy
 Saving to: dataset/bad/sample_008_aug4.npy
 Saving to: dataset/bad/sample_008_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04708 → valid: 1.00, diversity: 0.44, repair: 0.56
+[DEBUG] Sequence shape before validation: (32, 144)
+04708 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_009_aug0.npy
 Saving to: dataset/bad/sample_009_aug1.npy
 Saving to: dataset/bad/sample_009_aug2.npy
 Saving to: dataset/bad/sample_009_aug3.npy
 Saving to: dataset/bad/sample_009_aug4.npy
 Saving to: dataset/bad/sample_009_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-67381 → valid: 1.00, diversity: 0.59, repair: 0.41
+[DEBUG] Sequence shape before validation: (32, 144)
+67381 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_010_aug0.npy
 Saving to: dataset/bad/sample_010_aug1.npy
 Saving to: dataset/bad/sample_010_aug2.npy
 Saving to: dataset/bad/sample_010_aug3.npy
 Saving to: dataset/bad/sample_010_aug4.npy
 Saving to: dataset/bad/sample_010_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
 04718 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_011_aug0.npy
 Saving to: dataset/bad/sample_011_aug1.npy
@@ -566,35 +590,39 @@ Saving to: dataset/bad/sample_011_aug2.npy
 Saving to: dataset/bad/sample_011_aug3.npy
 Saving to: dataset/bad/sample_011_aug4.npy
 Saving to: dataset/bad/sample_011_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04720 → valid: 1.00, diversity: 0.47, repair: 0.53
+[DEBUG] Sequence shape before validation: (32, 144)
+04720 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_012_aug0.npy
 Saving to: dataset/bad/sample_012_aug1.npy
 Saving to: dataset/bad/sample_012_aug2.npy
 Saving to: dataset/bad/sample_012_aug3.npy
 Saving to: dataset/bad/sample_012_aug4.npy
 Saving to: dataset/bad/sample_012_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04721 → valid: 1.00, diversity: 0.59, repair: 0.41
+[DEBUG] Sequence shape before validation: (32, 144)
+04721 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_013_aug0.npy
 Saving to: dataset/bad/sample_013_aug1.npy
 Saving to: dataset/bad/sample_013_aug2.npy
 Saving to: dataset/bad/sample_013_aug3.npy
 Saving to: dataset/bad/sample_013_aug4.npy
 Saving to: dataset/bad/sample_013_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04722 → valid: 1.00, diversity: 0.69, repair: 0.31
+[DEBUG] Sequence shape before validation: (32, 144)
+04722 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/bad/sample_014_aug0.npy
 Saving to: dataset/bad/sample_014_aug1.npy
 Saving to: dataset/bad/sample_014_aug2.npy
 Saving to: dataset/bad/sample_014_aug3.npy
 Saving to: dataset/bad/sample_014_aug4.npy
 Saving to: dataset/bad/sample_014_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-04723 → valid: 1.00, diversity: 0.34, repair: 0.66
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
+[DEBUG] Sequence shape before validation: (32, 144)
+04723 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/bad/sample_015_aug0.npy
+Saving to: dataset/bad/sample_015_aug1.npy
+Saving to: dataset/bad/sample_015_aug2.npy
+Saving to: dataset/bad/sample_015_aug3.npy
+Saving to: dataset/bad/sample_015_aug4.npy
+Saving to: dataset/bad/sample_015_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
 25037 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_000_aug0.npy
 Saving to: dataset/good/sample_000_aug1.npy
@@ -602,128 +630,132 @@ Saving to: dataset/good/sample_000_aug2.npy
 Saving to: dataset/good/sample_000_aug3.npy
 Saving to: dataset/good/sample_000_aug4.npy
 Saving to: dataset/good/sample_000_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-69347 → valid: 1.00, diversity: 0.81, repair: 0.19
+[DEBUG] Sequence shape before validation: (32, 144)
+69347 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_001_aug0.npy
 Saving to: dataset/good/sample_001_aug1.npy
 Saving to: dataset/good/sample_001_aug2.npy
 Saving to: dataset/good/sample_001_aug3.npy
 Saving to: dataset/good/sample_001_aug4.npy
 Saving to: dataset/good/sample_001_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-70259 → valid: 1.00, diversity: 0.25, repair: 0.75
-[REJECTED] ->too_repaired
-
-[DEBUG] Sequence shape before validation: (32, 126)
-25072 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+70259 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_002_aug0.npy
 Saving to: dataset/good/sample_002_aug1.npy
 Saving to: dataset/good/sample_002_aug2.npy
 Saving to: dataset/good/sample_002_aug3.npy
 Saving to: dataset/good/sample_002_aug4.npy
 Saving to: dataset/good/sample_002_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25073 → valid: 1.00, diversity: 0.97, repair: 0.03
+[DEBUG] Sequence shape before validation: (32, 144)
+25072 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_003_aug0.npy
 Saving to: dataset/good/sample_003_aug1.npy
 Saving to: dataset/good/sample_003_aug2.npy
 Saving to: dataset/good/sample_003_aug3.npy
 Saving to: dataset/good/sample_003_aug4.npy
 Saving to: dataset/good/sample_003_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25074 → valid: 1.00, diversity: 0.81, repair: 0.19
+[DEBUG] Sequence shape before validation: (32, 144)
+25073 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_004_aug0.npy
 Saving to: dataset/good/sample_004_aug1.npy
 Saving to: dataset/good/sample_004_aug2.npy
 Saving to: dataset/good/sample_004_aug3.npy
 Saving to: dataset/good/sample_004_aug4.npy
 Saving to: dataset/good/sample_004_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25075 → valid: 1.00, diversity: 0.62, repair: 0.38
+[DEBUG] Sequence shape before validation: (32, 144)
+25074 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_005_aug0.npy
 Saving to: dataset/good/sample_005_aug1.npy
 Saving to: dataset/good/sample_005_aug2.npy
 Saving to: dataset/good/sample_005_aug3.npy
 Saving to: dataset/good/sample_005_aug4.npy
 Saving to: dataset/good/sample_005_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-65835 → valid: 1.00, diversity: 0.81, repair: 0.19
+[DEBUG] Sequence shape before validation: (32, 144)
+25075 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_006_aug0.npy
 Saving to: dataset/good/sample_006_aug1.npy
 Saving to: dataset/good/sample_006_aug2.npy
 Saving to: dataset/good/sample_006_aug3.npy
 Saving to: dataset/good/sample_006_aug4.npy
 Saving to: dataset/good/sample_006_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25066 → valid: 1.00, diversity: 0.75, repair: 0.25
+[DEBUG] Sequence shape before validation: (32, 144)
+65835 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_007_aug0.npy
 Saving to: dataset/good/sample_007_aug1.npy
 Saving to: dataset/good/sample_007_aug2.npy
 Saving to: dataset/good/sample_007_aug3.npy
 Saving to: dataset/good/sample_007_aug4.npy
 Saving to: dataset/good/sample_007_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-67723 → valid: 1.00, diversity: 0.72, repair: 0.28
+[DEBUG] Sequence shape before validation: (32, 144)
+25066 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_008_aug0.npy
 Saving to: dataset/good/sample_008_aug1.npy
 Saving to: dataset/good/sample_008_aug2.npy
 Saving to: dataset/good/sample_008_aug3.npy
 Saving to: dataset/good/sample_008_aug4.npy
 Saving to: dataset/good/sample_008_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25076 → valid: 1.00, diversity: 0.41, repair: 0.59
+[DEBUG] Sequence shape before validation: (32, 144)
+67723 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_009_aug0.npy
 Saving to: dataset/good/sample_009_aug1.npy
 Saving to: dataset/good/sample_009_aug2.npy
 Saving to: dataset/good/sample_009_aug3.npy
 Saving to: dataset/good/sample_009_aug4.npy
 Saving to: dataset/good/sample_009_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25067 → valid: 1.00, diversity: 0.47, repair: 0.53
+[DEBUG] Sequence shape before validation: (32, 144)
+25076 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_010_aug0.npy
 Saving to: dataset/good/sample_010_aug1.npy
 Saving to: dataset/good/sample_010_aug2.npy
 Saving to: dataset/good/sample_010_aug3.npy
 Saving to: dataset/good/sample_010_aug4.npy
 Saving to: dataset/good/sample_010_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25068 → valid: 1.00, diversity: 0.56, repair: 0.44
+[DEBUG] Sequence shape before validation: (32, 144)
+25067 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_011_aug0.npy
 Saving to: dataset/good/sample_011_aug1.npy
 Saving to: dataset/good/sample_011_aug2.npy
 Saving to: dataset/good/sample_011_aug3.npy
 Saving to: dataset/good/sample_011_aug4.npy
 Saving to: dataset/good/sample_011_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25069 → valid: 1.00, diversity: 0.47, repair: 0.53
+[DEBUG] Sequence shape before validation: (32, 144)
+25068 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_012_aug0.npy
 Saving to: dataset/good/sample_012_aug1.npy
 Saving to: dataset/good/sample_012_aug2.npy
 Saving to: dataset/good/sample_012_aug3.npy
 Saving to: dataset/good/sample_012_aug4.npy
 Saving to: dataset/good/sample_012_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25070 → valid: 1.00, diversity: 0.78, repair: 0.22
+[DEBUG] Sequence shape before validation: (32, 144)
+25069 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_013_aug0.npy
 Saving to: dataset/good/sample_013_aug1.npy
 Saving to: dataset/good/sample_013_aug2.npy
 Saving to: dataset/good/sample_013_aug3.npy
 Saving to: dataset/good/sample_013_aug4.npy
 Saving to: dataset/good/sample_013_aug5.npy
-[DEBUG] Sequence shape before validation: (32, 126)
-25071 → valid: 1.00, diversity: 1.00, repair: 0.00
+[DEBUG] Sequence shape before validation: (32, 144)
+25070 → valid: 1.00, diversity: 1.00, repair: 0.00
 Saving to: dataset/good/sample_014_aug0.npy
 Saving to: dataset/good/sample_014_aug1.npy
 Saving to: dataset/good/sample_014_aug2.npy
 Saving to: dataset/good/sample_014_aug3.npy
 Saving to: dataset/good/sample_014_aug4.npy
 Saving to: dataset/good/sample_014_aug5.npy
+[DEBUG] Sequence shape before validation: (32, 144)
+25071 → valid: 1.00, diversity: 1.00, repair: 0.00
+Saving to: dataset/good/sample_015_aug0.npy
+Saving to: dataset/good/sample_015_aug1.npy
+Saving to: dataset/good/sample_015_aug2.npy
+Saving to: dataset/good/sample_015_aug3.npy
+Saving to: dataset/good/sample_015_aug4.npy
+Saving to: dataset/good/sample_015_aug5.npy
 
  __DATASET SUMMARY__
 Total number of classes: 5
-yes: 19 .npy files saved
-no: 20 .npy files saved
-wait: 17 .npy files saved
-good: 15 .npy files saved
-bad: 15 .npy files saved
-Total samples saved: 86
+yes: 22 .npy files saved
+no: 22 .npy files saved
+wait: 18 .npy files saved
+good: 16 .npy files saved
+bad: 16 .npy files saved
+Total samples saved: 94

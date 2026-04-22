@@ -3,8 +3,13 @@ from collections import deque
 
 import cv2
 import numpy as np
-from landmarks import get_landmarks
-from tensorflow.keras.models import load_model # pyright: ignore[reportMissingModuleScource]
+from landmarks import get_landmarks 
+from tensorflow.keras.models import load_model # pyright: ignore[reportMissingModuleSource]
+
+def is_no_hand_sequence(sequence, threshold = 0.6): # returns true when most frames no hand (zero-vector)
+    zero_frames = sum(np.all(frame == 0) for frame in sequence)
+    return (zero_frames / len(sequence) >= threshold)
+
 
 # loading model
 model = load_model("model/best_model.h5")
@@ -31,11 +36,24 @@ while True:
 
     # extracting landmarks
     landmarks = get_landmarks(frame)
-    sequence.append(landmarks)
+
+    if landmarks is not None:
+        sequence.append(landmarks)
 
     # prediction
     if len(sequence) == 32:
-        res = model.predict(np.expand_dims(np.array(sequence), axis=0))[0]
+        
+        seq_array = np.array(sequence)
+
+        # blocking prediction if no hands are detected
+        if is_no_hand_sequence(seq_array):
+            print("No hands detected- Skipping prediction")
+            predictions.append(None)
+            sequence.clear()
+            predictions.clear()
+            continue
+
+        res = model.predict(np.expand_dims(seq_array, axis=0))[0]
 
         confidence = np.max(res)
         pred = np.argmax(res)
@@ -46,7 +64,17 @@ while True:
         else:
             predictions.append(None)
 
-        print(f"Pred: {actions[pred]} | Conf: {confidence:.2f}")
+        if len(predictions) == 10:
+            valid_preds = [p for p in predictions if p is not None]
+
+            if len(valid_preds) > 0:
+                most_common = max(set(valid_preds), key = valid_preds.count)
+
+                if valid_preds.count(most_common) > 7:
+                    final_pred = most_common
+
+        if final_pred is not None: # pyright: ignore[reportPossiblyUnboundVariable]
+            print(f"Pred: {actions[final_pred]} | Conf: {confidence:.2f}") # pyright: ignore[reportPossiblyUnboundVariable]
 
         # smoothing
         final_pred = None
