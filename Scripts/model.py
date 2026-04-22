@@ -68,7 +68,7 @@ print("[DEBUG] Number of classes:", len(actions))
 # DEBUG: Empty Dataset Check
 assert len(x) > 0, "Dataset is empty. Something failed upstream."
 # DEBUG: Data Shape Check
-assert x.shape[1:] == (32, 126), "Dataset shape mismatch. Expected (30, 126)"
+assert x.shape[1:] == (32, 144), "Dataset shape mismatch. Expected (30, 126)"
 
 # DEBUG: Data sanity check
 if np.isnan(x).any():
@@ -114,7 +114,7 @@ X_train, X_val, y_train, y_val = train_test_split(x, y, test_size=0.2, stratify=
 # building model
 model = Sequential()
 
-model.add(LSTM(64, return_sequences=True, activation="relu", input_shape=(32, 126)))
+model.add(LSTM(64, return_sequences=True, activation="relu", input_shape=(32, 144)))
 model.add(Dropout(0.3))
 
 # model.add(LSTM(128, return_sequences=True, activation="relu"))

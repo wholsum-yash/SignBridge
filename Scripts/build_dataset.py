@@ -120,7 +120,7 @@ for entry in filtered:
             continue
       
         # Ensuring Shape at dataset level
-        if sequence.shape != (32, 126):
+        if sequence.shape != (32, 144):
             print(f"[SKIP] Invalid Shape:{sequence.shape}")
             continue
         
