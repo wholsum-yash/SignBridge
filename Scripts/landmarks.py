@@ -18,7 +18,7 @@ face_mesh = mp_face.FaceMesh()
 pose = mp_pose.Pose()
 
 HAND_FEATURES = 126
-TOTAL_FEATURES = 148
+TOTAL_FEATURES = 144
 
 # temporal decay memory
 last_valid_hands = None
@@ -111,7 +111,7 @@ def extract_hand_landmarks(results): # Extract hand landmarks and normalize them
 
     return final_landmarks, hand_centers
 
-def extract_face_points(face_results): # extract key face points used for spacial reasoning (not complete face mesh)
+def extract_face_points(face_results): # extract key face points used for spatial reasoning (not complete face mesh)
     if not face_results.multi_face_landmarks:
         return None
 
@@ -141,7 +141,7 @@ def extract_neck_points(pose_results): # estiamtes neck position as midpoint bet
 
     return ((left.x + right.x )/2, (left.y + right.y)/2)
 
-# spacial features engine
+# spatial features engine
 def compute_spatial_features(center, face, neck):
 
     """Converts hand position into spatial features relative to face and neck;
@@ -196,13 +196,13 @@ def get_landmarks(frame):
     # neck
     neck = extract_neck_points(pose_results)
 
-    spacial_features = []
+    spatial_features = []
 
     for center in hand_centers:
-        spacial = compute_spatial_features(center, face, neck)
-        spacial_features.extend(spacial)
+        spatial = compute_spatial_features(center, face, neck)
+        spatial_features.extend(spatial)
 
-    final_features = hand_features + spacial_features
+    final_features = hand_features + spatial_features
 
     # SAFETY: CHECKING -> consistent feature size for model input
     if(len(final_features) != TOTAL_FEATURES):

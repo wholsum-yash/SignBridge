@@ -33,7 +33,6 @@ TARGET_WORDS = [
     #"walk"
 ]
 MAX_SAMPLES_PER_CLASS = 150 # safety cap
-VALID_THRESHOLD = 0.6
 
 filtered = []  # Holds the TARGET_WORDS data from the availble data.
 
@@ -44,9 +43,6 @@ for entry in data:
 
 # Your Path to dataset videos as BASE_PATH
 BASE_PATH = "/home/wholsum/projects/SignBridge/WLASL-complete/videos/"
-
-for entry in filtered:
-    label = entry["gloss"].lower()
 
 for label in TARGET_WORDS:
     os.makedirs(f"dataset/{label}", exist_ok= True)
@@ -105,7 +101,7 @@ for entry in filtered:
 
 
         # Safety check
-        if sequence.ndim != 2 or sequence.shape[1] != 126:
+        if sequence.ndim != 2 or sequence.shape[1] != 144:
             print(f"[REJECTED] Invalid shape of sequence before validation: {sequence.shape}")
             continue       
 
