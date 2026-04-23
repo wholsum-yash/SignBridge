@@ -3,10 +3,15 @@ from collections import deque
 
 import cv2
 import numpy as np
-from landmarks import get_landmarks 
-from tensorflow.keras.models import load_model # pyright: ignore[reportMissingModuleSource]
+from landmarks import get_landmarks
+from tensorflow.keras.models import load_model  # pyright: ignore
 
-def is_no_hand_sequence(sequence, threshold = 0.6): # returns true when most frames no hand (zero-vector)
+from prediction_filter import Stabilizer
+from state_machine import StateMachine
+from sentence_builder import SentenceBuilder
+
+
+def is_no_hand_sequence(sequence, threshold=0.6):
     zero_frames = sum(np.all(frame == 0) for frame in sequence)
     return (zero_frames / len(sequence) >= threshold)
 
@@ -14,15 +19,29 @@ def is_no_hand_sequence(sequence, threshold = 0.6): # returns true when most fra
 # loading model
 model = load_model("model/best_model.h5")
 
-# TARGET WORDS labels in Training Order
+# labels
 DATA_PATH = "dataset"
 actions = sorted(os.listdir(DATA_PATH))
 
 # buffers
 sequence = deque(maxlen=32)
-predictions = deque(maxlen=10)
 
-# video input (VIDEO FOR DEMO)
+# display hold
+display_word = None
+display_timer = 0
+DISPLAY_FRAMES = 6  # snappy
+
+# modules
+stabilizer = Stabilizer(
+    maxlen=10,
+    conf_threshold=0.6,
+    score_threshold=4.0
+)
+
+state_machine = StateMachine(cooldown_frames=15)
+sentence_builder = SentenceBuilder(max_pause_frames=20)
+
+# video input
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 
 if not cap.isOpened():
@@ -40,54 +59,63 @@ while True:
     if landmarks is not None:
         sequence.append(landmarks)
 
-    # prediction
     if len(sequence) == 32:
-        
+
         seq_array = np.array(sequence)
 
-        # blocking prediction if no hands are detected
-        if is_no_hand_sequence(seq_array):
-            print("No hands detected- Skipping prediction")
-            predictions.append(None)
-            sequence.clear()
-            predictions.clear()
-            continue
+        no_hand = is_no_hand_sequence(seq_array)
 
-        res = model.predict(np.expand_dims(seq_array, axis=0))[0]
-
-        confidence = np.max(res)
-        pred = np.argmax(res)
-
-        # confidence filter
-        if confidence > 0.7:
-            predictions.append(pred)
+        if no_hand:
+            stabilizer.reset()
         else:
-            predictions.append(None)
+            res = model.predict(np.expand_dims(seq_array, axis=0))[0]
 
-        final_pred = None
+            confidence = float(np.max(res))
+            pred = int(np.argmax(res))
 
-        # smoothing
-        if len(predictions) == 10:
-            valid_preds = [p for p in predictions if p is not None]
+            if confidence >= 0.75:
+                stabilizer.update(pred, confidence)
 
-            if len(valid_preds) > 0:
-                most_common = max(set(valid_preds), key = valid_preds.count)
+        final_pred = stabilizer.get_output()
 
-                if valid_preds.count(most_common) > 7:
-                    final_pred = most_common
+        has_hand = not no_hand
+        emitted = state_machine.update(has_hand, final_pred)
 
-        if final_pred is not None: 
-            print(f"Pred: {actions[final_pred]} | Conf: {confidence:.2f}") 
+        # SENTENCE BUILDER 
+        final_sentence = sentence_builder.update(emitted, has_hand, actions)
+        current_sentence = sentence_builder.get_current_sentence()
 
-        # display
-        if final_pred is not None:
+        if final_sentence is not None:
+            print(f"SENTENCE: {final_sentence}")
+
+        # WORD DISPLAY 
+        if emitted is not None:
+            print(f"FINAL: {actions[emitted]}")
+            display_word = actions[emitted]
+            display_timer = DISPLAY_FRAMES
+
+        # show word briefly
+        if display_word is not None and display_timer > 0:
             cv2.putText(
                 frame,
-                f"{actions[final_pred]} ({confidence:.2f})",
+                display_word,
                 (50, 100),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                0.7,
-                (255, 255, 0),
+                1,
+                (0, 255, 0),
+                2,
+            )
+            display_timer -= 1
+
+        # SENTENCE DISPLAY 
+        if current_sentence:
+            cv2.putText(
+                frame,
+                current_sentence,
+                (50, 160),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.8,
+                (255, 255, 255),
                 2,
             )
 
