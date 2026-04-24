@@ -4,12 +4,12 @@ from collections import deque
 import cv2
 import numpy as np
 from landmarks import get_landmarks
-from tensorflow.keras.models import load_model  # pyright: ignore
+from tensorflow.keras.models import load_model  # pyright: ignore[reportMissingModuleSource] 
 
 from prediction_filter import Stabilizer
 from state_machine import StateMachine
 from sentence_builder import SentenceBuilder
-
+from UI_UX import draw_ui 
 
 def is_no_hand_sequence(sequence, threshold=0.6):
     zero_frames = sum(np.all(frame == 0) for frame in sequence)
@@ -29,9 +29,11 @@ sequence = deque(maxlen=32)
 # display hold
 display_word = None
 display_timer = 0
-DISPLAY_FRAMES = 6  # snappy
+DISPLAY_FRAMES = 6  #  for words to be snappy on screen
 
-# modules
+confidence = 0.0 # pre-defined to prevent crashes
+
+# prediction_filter module
 stabilizer = Stabilizer(
     maxlen=10,
     conf_threshold=0.6,
@@ -78,6 +80,7 @@ while True:
 
         final_pred = stabilizer.get_output()
 
+        # STATE MACHINE
         has_hand = not no_hand
         emitted = state_machine.update(has_hand, final_pred)
 
@@ -94,35 +97,29 @@ while True:
             display_word = actions[emitted]
             display_timer = DISPLAY_FRAMES
 
-        # show word briefly
-        if display_word is not None and display_timer > 0:
-            cv2.putText(
-                frame,
-                display_word,
-                (50, 100),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                1,
-                (0, 255, 0),
-                2,
-            )
+        # reduce timer (snappy persistence)
+        if display_timer > 0:
             display_timer -= 1
+        else:
+            display_word = None
 
-        # SENTENCE DISPLAY 
-        if current_sentence:
-            cv2.putText(
-                frame,
-                current_sentence,
-                (50, 160),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.8,
-                (255, 255, 255),
-                2,
-            )
+    else:
+        current_sentence = ""
+
+    # UI RENDER (ONLY PLACE FOR VISUALS) 
+    frame = draw_ui(
+        frame,
+        display_word,
+        current_sentence,
+        confidence,
+        state_machine.get_state()
+    )
 
     cv2.imshow("SignBridge Demo", frame)
 
     if cv2.waitKey(10) & 0xFF == ord("q"):
         break
 
+# CLEANUP 
 cap.release()
 cv2.destroyAllWindows()
