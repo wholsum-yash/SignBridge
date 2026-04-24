@@ -18,7 +18,6 @@ face_mesh = mp_face.FaceMesh()
 pose = mp_pose.Pose()
 
 HAND_FEATURES = 126
-TOTAL_FEATURES = 144
 
 # temporal decay memory
 last_valid_hands = None
@@ -103,7 +102,7 @@ def extract_hand_landmarks(results): # Extract hand landmarks and normalize them
     if padding > 0:
         all_landmarks.extend([0] * padding)
 
-    final_landmarks = all_landmarks[:126]
+    final_landmarks = all_landmarks[:HAND_FEATURES]
 
 
     if not zero_frame(final_landmarks):
@@ -111,71 +110,6 @@ def extract_hand_landmarks(results): # Extract hand landmarks and normalize them
 
     return final_landmarks, hand_centers
 
-def extract_face_points(face_results): # extract key face points used for spatial reasoning (not complete face mesh)
-    if not face_results.multi_face_landmarks:
-        return None
-
-    face = face_results.multi_face_landmarks[0]
-
-    def get(idx):
-        p = face.landmark[idx]
-
-        return (p.x, p.y)
-
-    return{
-        "nose": get(1),
-        "chin": get(152),
-        "forehead": get(10),
-        "left_cheek": get(234),
-        "right_cheek": get(454)
-    }
-
-def extract_neck_points(pose_results): # estiamtes neck position as midpoint between shoulders
-    if not pose_results.pose_landmarks:
-        return (0,0)
-
-    lm = pose_results.pose_landmarks.landmark
-
-    left = lm[mp_pose.PoseLandmark.LEFT_SHOULDER]
-    right = lm[mp_pose.PoseLandmark.RIGHT_SHOULDER]
-
-    return ((left.x + right.x )/2, (left.y + right.y)/2)
-
-# spatial features engine
-def compute_spatial_features(center, face, neck):
-
-    """Converts hand position into spatial features relative to face and neck;
-    This logic allows model to distinguish between similar sign gestures by location """    
-
-    if face is None:
-        return [0] * 9
-
-    # distances
-    d_nose = distance(center, face["nose"])
-    d_chin = distance(center, face["chin"])
-    d_forehead = distance(center, face["forehead"])
-    d_left_cheek = distance(center, face["left_cheek"])
-    d_right_cheek = distance(center, face["right_cheek"])
-
-    # normalization: normalizing distance to make it invariant to camera distance
-    face_h = distance(face["nose"], face["chin"]) + 1e-6 # 1e-6: a tiny number added to prevent division by zero
-    face_w = distance(face["left_cheek"], face["right_cheek"]) + 1e-6
-
-    # relative position
-    cx, cy = face["nose"]
-
-    rel_x = (center[0] - cx)/ face_w
-    rel_y = (center[1] - cy)/ face_h
-
-    # neck
-    d_neck = distance(center, neck)
-    rel_neck_y = (center[1] - neck[1]) / face_h
-
-    return [
-        d_nose, d_chin, d_forehead, d_left_cheek, d_right_cheek, d_neck,
-        rel_x, rel_y,
-        rel_neck_y
-    ] 
 # Getting Mediapipe Landmarks
 def get_landmarks(frame):
 
@@ -184,33 +118,15 @@ def get_landmarks(frame):
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     hand_results = hands.process(frame_rgb)
-    face_results = face_mesh.process(frame_rgb)
-    pose_results = pose.process(frame_rgb)
 
-    # hands
-    hand_features, hand_centers = extract_hand_landmarks(hand_results)
+    # FIX: unpacking tuple correctly
+    hand_features, _  = extract_hand_landmarks(hand_results)
 
-    # face
-    face = extract_face_points(face_results)
+    if len(hand_features) != HAND_FEATURES:
+        return [0] * HAND_FEATURES
 
-    # neck
-    neck = extract_neck_points(pose_results)
-
-    spatial_features = []
-
-    for center in hand_centers:
-        spatial = compute_spatial_features(center, face, neck)
-        spatial_features.extend(spatial)
-
-    final_features = hand_features + spatial_features
-
-    # SAFETY: CHECKING -> consistent feature size for model input
-    if(len(final_features) != TOTAL_FEATURES):
-        return [0] * TOTAL_FEATURES
-
-    return final_features 
-   
-
+    return hand_features
+ 
 def repair_frames(sequence): # Fixes broken (zero) frames in a sequence by copying adjacent valid frames.
 
     """

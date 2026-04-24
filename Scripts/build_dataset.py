@@ -7,6 +7,10 @@ from frames import extract_frames
 from landmarks import get_landmarks, repair_frames # pyright: ignore[reportAttributeAccessIssue]
 from clean_dataset import validate_sequence
 
+BASE_FEATURES = 126 # landmarks features only
+USE_VELOCITY = True # toggle ON/OFF
+
+TOTAL_FEATURES = BASE_FEATURES * (2 if USE_VELOCITY else 1)
 
 with open("/home/wholsum/projects/SignBridge/WLASL-complete/WLASL_v0.3.json") as words:
     data = json.load(words)
@@ -52,6 +56,9 @@ counters = { label:0
     for label in TARGET_WORDS
 }  # dictionary to count samples per class
 
+file_counter = {label: 0
+    for label in TARGET_WORDS
+} # counts actual .npy files
 
 for entry in filtered:
     label = entry["gloss"].lower()
@@ -77,6 +84,10 @@ for entry in filtered:
 
         for frame in frames:
             landmarks = get_landmarks(frame)
+
+            # DEBUG: Checks if pipeline is working and landmarks is not returning zeros.
+            # print("SUM:", np.sum(landmarks))
+            
             sequence.append(landmarks)
        
         # Repair broken frames using landmarks.py
@@ -96,12 +107,24 @@ for entry in filtered:
         # converting frames to numpy
         sequence = np.array(sequence)
 
+        # adding velocity features
+        if USE_VELOCITY:
+        
+            # velocity = difference between consecutive frames
+            velocity = np.diff(sequence, axis=0)
+
+            # pad first frame so shapes match (same length as sequence)
+            velocity = np.vstack([np.zeros_like(sequence[0]), velocity])
+
+            # concatenate position + velocity
+            sequence = np.concatenate([sequence, velocity], axis=1)
+
         # DEBUG: Checking Sequence Shape
         print(f"[DEBUG] Sequence shape before validation: {sequence.shape}")
 
 
         # Safety check
-        if sequence.ndim != 2 or sequence.shape[1] != 144:
+        if sequence.ndim != 2 or sequence.shape[1] != TOTAL_FEATURES:
             print(f"[REJECTED] Invalid shape of sequence before validation: {sequence.shape}")
             continue       
 
@@ -120,7 +143,7 @@ for entry in filtered:
             continue
       
         # Ensuring Shape at dataset level
-        if sequence.shape != (32, 144):
+        if sequence.shape != (32, TOTAL_FEATURES):
             print(f"[SKIP] Invalid Shape:{sequence.shape}")
             continue
         
@@ -129,14 +152,22 @@ for entry in filtered:
         
         # path creation
         save_dir = f"dataset/{label}"
-        count = counters[label]
 
         for idx, aug_seq in enumerate(augment_sequences):
-            save_path = f"{save_dir}/sample_{count:03d}_aug{idx}.npy"
+
+            if idx == 0:
+                filename = f"{label}_{video_id}_Orig.npy"
+
+            else:
+                filename = f"{label}_{video_id}_aug{idx}.npy"
+
+            save_path = os.path.join(save_dir, filename)
         
             # saving samples
             print(f"Saving to: {save_path}")
             np.save(save_path, aug_seq)
+
+            file_counter[label] += 1 
 
         # incrementing counter AFTER saving all augmented versions
         counters[label] += 1
@@ -145,4 +176,4 @@ print("\n __DATASET SUMMARY__")
 print(f"Total number of classes: {len(TARGET_WORDS)}")
 for label in TARGET_WORDS:
     print(f"{label}: {counters[label]} .npy files saved")
-print(f"Total samples saved: {sum(counters.values())}")
+print(f"Total Samples Saved: {sum(file_counter.values())}")

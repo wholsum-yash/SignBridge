@@ -5,6 +5,8 @@ VALID_THRESHOLD = 0.5
 DIVERSITY_THRESHOLD = 0.2
 FALLBACK_THRESHOLD = 0.6
 
+BASE_FEATURES = 126
+
 # threshold computation
 def compute_metrics(sequence, fallback_ratio):
     """
@@ -21,10 +23,15 @@ def compute_metrics(sequence, fallback_ratio):
             "fallback_ratio" : fallback_ratio
         }
 
-    non_zero_frames = np.sum(np.any(sequence != 0, axis = 1))
+    landmarks = sequence[:, :BASE_FEATURES]
+    # velocity = sequence[:, :BASE_FEATURES] NOT USING FOR VALIDATION
+
+    # valid frames
+    non_zero_frames = np.sum(np.any(landmarks != 0, axis = 1))
     valid_ratio = non_zero_frames / total_frames
 
-    unique_frames = len(np.unique(sequence, axis = 0))
+    # unique frames
+    unique_frames = len(np.unique(landmarks, axis = 0))
     diversity_ratio = unique_frames / total_frames
 
     return {
