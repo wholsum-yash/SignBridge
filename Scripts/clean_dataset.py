@@ -1,11 +1,11 @@
 import numpy as np
 
 # THRESHOLDS (TO FILTER OUT GOOD DATA)
-VALID_THRESHOLD = 0.5
-DIVERSITY_THRESHOLD = 0.2
+VALID_THRESHOLD = 0.3
+DIVERSITY_THRESHOLD = 0.05
 FALLBACK_THRESHOLD = 0.6
 
-BASE_FEATURES = 126
+BASE_FEATURES = 416
 
 # threshold computation
 def compute_metrics(sequence, fallback_ratio):

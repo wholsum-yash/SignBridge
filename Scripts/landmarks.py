@@ -5,19 +5,20 @@ CONFIDENCE_THRESHOLD = 0.5 # the minimum confidence to detect a hand sign
 
 """NOTE: mediapipe API doesn't expose clean confidence per frame; so we approx confidence using detection presence; no-hands -> 0, detected-hands -> 1, binary nature for now; Mediapipe handmarker for real confidence scores (Future Consideration). """
 
-mp_face = mp.solutions.face_mesh #pyright: ignore[reportAttributeAccessIssue]
 mp_hands = mp.solutions.hands #pyright: ignore[reportAttributeAccessIssue]
-mp_pose = mp.solutions.pose #pyright: ignore[reportAttributeAccessIssue]
 
 """ Initializing Mediapipe models for hands, face, pose detection
 
 NOTE: These run per frame and provide raw landmark data """
 
-hands = mp_hands.Hands()
-face_mesh = mp_face.FaceMesh()
-pose = mp_pose.Pose()
+hands = mp_hands.Hands(
+    static_image_mode=False,
+    max_num_hands=2,
+    min_detection_confidence=0.7,
+    min_tracking_confidence=0.7
+)
 
-HAND_FEATURES = 126
+HAND_FEATURES = 416
 
 # temporal decay memory
 last_valid_hands = None
@@ -36,43 +37,82 @@ def compute_hand_center(hand_landmarks): # computes geometric center of hands; u
     ys =[p.y for p in hand_landmarks.landmark]
     return (np.mean(xs), np.mean(ys))
 
-# extracting features: hands, face, neck
-def extract_hand_landmarks(results): # Extract hand landmarks and normalize them relative to wrist
+# extracting features: hands 
+def extract_hand_landmarks(results):
 
     global last_valid_hands, missing_frame_count
 
     all_landmarks = []
-    hand_centers= []
+    hand_centers = []
 
-    # CASE 1: HAND NOT DETECTED (DECAYED AWAY)
+    # adding feature engineering
+    def engineer_features(landmarks):
+        lm = np.array(landmarks).reshape(2, 21, 3)
+
+        features = []
+
+        for hand in lm:
+            if np.all(hand == 0):
+                #  FIX: match full feature size per hand (145)
+                features.extend([0] * 145)
+                continue
+
+            wrist = hand[0]
+            norm = hand - wrist
+
+            scale = np.linalg.norm(hand[9] - hand[0])
+            if scale < 1e-3:
+                scale = 1.0
+            norm = norm / scale
+
+            # 63 coords
+            features.extend(norm.flatten())
+
+            # 60 bone vectors
+            for i in range(1, 21):
+                features.extend(norm[i] - norm[i - 1])
+
+            # 19 angles
+            for i in range(1, 20):
+                v1 = norm[i] - norm[i - 1]
+                v2 = norm[i + 1] - norm[i]
+                cos_angle = np.dot(v1, v2) / (
+                    np.linalg.norm(v1) * np.linalg.norm(v2) + 1e-6
+                )
+                features.append(cos_angle)
+
+            # 3 centroid
+            centroid = np.mean(norm, axis=0)
+            features.extend(centroid)
+
+        features = np.array(features)
+
+        #  FINAL SAFETY: force fixed size
+        if len(features) < HAND_FEATURES:
+            features = np.pad(features, (0, HAND_FEATURES - len(features)))
+        elif len(features) > HAND_FEATURES:
+            features = features[:HAND_FEATURES]
+
+        return features
+
+    # CASE 1: NO HAND 
     if not results.multi_hand_landmarks:
-        # return [0]*126, [(0,0), (0,0)]  --(OLD-LOGIC: INSTANT ZERO)--
         missing_frame_count += 1
 
-        # NEW-LOGIC: Decaying of missing hand
         if last_valid_hands is not None:
+            prev_landmarks, _ = last_valid_hands # pyright: ignore[reportGeneralTypeIssues]
 
-            if missing_frame_count <= DECAY_WINDOW:
-
-                # smoothly decay
-                prev_landmarks, prev_centers = last_valid_hands # pyright: ignore[reportGeneralTypeIssues]
-                
-                decay_factor = max(0, 1 - (missing_frame_count / DECAY_WINDOW))
-
-                decayed_landmarks = [v * decay_factor for v in prev_landmarks]
-
-                return decayed_landmarks, prev_centers
-
-            else:
-                # fully gone after decay
-                last_valid_hands = None
-                return [0]*126, [(0,0), (0,0)]
+            # This preserves motion consistency instead of flattening it
+            noise = np.random.normal(0, 0.01, size=len(prev_landmarks))
+            drift = missing_frame_count * 0.002
+            noisy = [v + n + drift for v, n in zip(prev_landmarks, noise)]
+            return engineer_features(noisy)
 
         else:
-            return [0]*126, [(0,0), (0,0)] 
+            return np.zeros(HAND_FEATURES)
 
-    # CASE 2: HAND DETECTED
-    missing_frame_count = 0 
+    # CASE 2: HAND DETECTED 
+    missing_frame_count = 0
 
     for i in range(min(len(results.multi_hand_landmarks), 2)):
         hand = results.multi_hand_landmarks[i]
@@ -87,40 +127,44 @@ def extract_hand_landmarks(results): # Extract hand landmarks and normalize them
 
         for j in range(0, len(landmarks), 3):
             landmarks[j] -= wrist_x
-            landmarks[j+1] -= wrist_y
+            landmarks[j + 1] -= wrist_y
 
         all_landmarks.extend(landmarks)
+        hand_centers.append(compute_hand_center(hand))
 
-        center = compute_hand_center(hand)
-        hand_centers.append(center)
-
-    # padding if 1 hand; ensuring consistent 2 hand representation; padding missing hand with zeros 
     while len(hand_centers) < 2:
-        hand_centers.append((0,0))
+        hand_centers.append((0, 0))
 
-    padding = HAND_FEATURES - len(all_landmarks)
-    if padding > 0:
-        all_landmarks.extend([0] * padding)
+    RAW_FEATURES = 126
 
-    final_landmarks = all_landmarks[:HAND_FEATURES]
+#  two hand structure -> important
+    if len(all_landmarks) == 63:  # only one hand detected
+        all_landmarks.extend([0] * 63)
 
+    if len(all_landmarks) < RAW_FEATURES:
+        all_landmarks.extend([0] * (RAW_FEATURES - len(all_landmarks)))
 
-    if not zero_frame(final_landmarks):
-        last_valid_hands = (final_landmarks, hand_centers)
+    final_landmarks = all_landmarks[:RAW_FEATURES]
+    # print("RAW SUM:", np.sum(final_landmarks))
 
-    return final_landmarks, hand_centers
+    #  STORE RAW FOR DECAY
+    last_valid_hands = (final_landmarks, hand_centers)
+
+    return engineer_features(final_landmarks)
 
 # Getting Mediapipe Landmarks
 def get_landmarks(frame):
 
-    """ Main feature extraction pipeline; Converts frames into fixed length feature vectors of dim(144) """
+    """ Main feature extraction pipeline; Converts frames into fixed length feature vectors of dim """
     
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    frame_rgb = cv2.resize(frame_rgb, (640, 480)) # upscaling helps mediapipe in hand detection
 
     hand_results = hands.process(frame_rgb)
+    # print("HAND DETECTED:", hand_results.multi_hand_landmarks is not None)
 
     # FIX: unpacking tuple correctly
-    hand_features, _  = extract_hand_landmarks(hand_results)
+    hand_features  = extract_hand_landmarks(hand_results)
 
     if len(hand_features) != HAND_FEATURES:
         return [0] * HAND_FEATURES

@@ -7,7 +7,7 @@ from frames import extract_frames
 from landmarks import get_landmarks, repair_frames # pyright: ignore[reportAttributeAccessIssue]
 from clean_dataset import validate_sequence
 
-BASE_FEATURES = 126 # landmarks features only
+BASE_FEATURES = 416# landmarks features only
 USE_VELOCITY = True # toggle ON/OFF
 
 TOTAL_FEATURES = BASE_FEATURES * (2 if USE_VELOCITY else 1)
@@ -22,21 +22,22 @@ TARGET_WORDS = [
     "yes",
     "no",
     "wait",
+    "go",
+    "stop",
+    "help",
+    "want",
+    "need",
+    "like",
     "good",
     "bad",
-    #"book",
-    #"drink",
-    #"computer",
-    #"before",
-    #"go",
-    #"chair",
-    #"clothes",
-    #"who",
-    #"deaf",
-    #"help",
-    #"walk"
+    "eat",
+    "drink",
+    "book",
+    "please",
+    "hello",
+    "talk"
 ]
-MAX_SAMPLES_PER_CLASS = 150 # safety cap
+MAX_SAMPLES_PER_CLASS = 300 # safety cap
 
 filtered = []  # Holds the TARGET_WORDS data from the availble data.
 
