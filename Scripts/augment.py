@@ -1,7 +1,6 @@
 import random
 
 import numpy as np
-from numpy.random.bit_generator import SeedlessSeedSequence
 
 
 # injecting noise
@@ -62,7 +61,7 @@ def random_occulsion(sequence, prob=0.1):
     return sequence
     
 # simulating random rotation (-15 to +15 degrees)
-def random_rotate(sequence, angle_range=(-15, 15)):
+""" def random_rotate(sequence, angle_range=(-15, 15)):
     angle = random.uniform(*angle_range)
     theta = np.radians(angle)
 
@@ -90,6 +89,7 @@ def random_rotate(sequence, angle_range=(-15, 15)):
         rotated[t] = frame_rotated.flatten()
 
     return rotated
+"""
 
 # Augment function (Main)
 def augment_sequence(sequence):
@@ -99,17 +99,15 @@ def augment_sequence(sequence):
     augmented.append(sequence)
 
     # adding variations at random
-    for aug in range(5):
+    for aug in range(4):
         seq = sequence.copy()
 
         seq = add_spatial_noise(seq)
         seq = temporal_warp(seq)
-        seq = frame_drop(seq)
+       # seq = frame_drop(seq)
         seq = scale_and_shift(seq)
-        seq = random_occulsion(seq)
-        
-        if np.random.rand() < 0.3:
-            seq = random_rotate(seq)
+       # seq = random_occulsion(seq)
+       
 
         augmented.append(seq)
 

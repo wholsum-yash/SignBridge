@@ -1,27 +1,22 @@
 import cv2
 
-# Maps confidence → color 
+
 def get_conf_color(conf):
     if conf >= 0.8:
-        return (0, 255, 0)     # green
+        return (0, 255, 0)
     elif conf >= 0.6:
-        return (0, 255, 255)   # yellow
+        return (0, 255, 255)
     else:
-        return (0, 0, 255)     # red
+        return (0, 0, 255)
 
 
-# GENERIC BANNER 
 def draw_banner(frame, text, x, y, w, h, bg_color, text_color, scale, thickness):
     overlay = frame.copy()
 
-    # background box
     cv2.rectangle(overlay, (x, y), (x + w, y + h), bg_color, -1)
 
-    # transparency blend
-    alpha = 0.6
-    frame = cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0)
+    frame = cv2.addWeighted(overlay, 0.6, frame, 0.4, 0)
 
-    # text
     cv2.putText(
         frame,
         text,
@@ -36,73 +31,75 @@ def draw_banner(frame, text, x, y, w, h, bg_color, text_color, scale, thickness)
     return frame
 
 
-# MAIN UI 
 def draw_ui(frame, word, sentence, confidence, state):
     h, w, _ = frame.shape
 
-    # get confidence color ONCE (used everywhere)
     conf_color = get_conf_color(confidence if confidence is not None else 0)
 
-    # WORD BANNER (TOP - PRIMARY) 
+    # word
     if word:
-
-        # dynamic but CLAMPED width
-        min_w = 90
-        max_w = 220
-        banner_width = min(max_w, max(min_w, 60 + len(word) * 12))
+        banner_width = min(220, max(90, 60 + len(word) * 12))
 
         frame = draw_banner(
             frame,
             word,
-            x = 30,
-            y = 30,
-            w=banner_width,
-            h = 45,
-            bg_color=(30, 30, 30),
-            text_color=conf_color,   # color reflects confidence
-            scale = 0.95,
-            thickness = 3
+            30,
+            30,
+            banner_width,
+            45,
+            (30, 30, 30),
+            conf_color,
+            0.95,
+            3
         )
 
-    # SENTENCE BANNER (BOTTOM - CAPTION STYLE) 
+    # sentence stack
     if sentence:
-        frame = draw_banner(
-            frame,
-            sentence,
-            x=30,
-            y=h - 100,              # moved to bottom → caption feel
-            w=w - 60,
-            h=60,
-            bg_color=(20, 20, 20),
-            text_color=(255, 255, 255),
-            scale=0.8,
-            thickness=2
+
+        line_height = 28
+        padding = 15
+
+        num_lines = len(sentence)
+        box_height = padding * 2 + line_height * num_lines
+
+        y_start = h - box_height - 20
+
+        overlay = frame.copy()
+
+        cv2.rectangle(
+            overlay,
+            (30, y_start),
+            (w - 30, y_start + box_height),
+            (20, 20, 20),
+            -1
         )
 
-    # CONFIDENCE BAR (TOP LEFT) 
+        frame = cv2.addWeighted(overlay, 0.6, frame, 0.4, 0)
+
+        # draw bottom-up
+        for i, line in enumerate(reversed(sentence)):
+            y = y_start + box_height - padding - (i * line_height)
+
+            cv2.putText(
+                frame,
+                line,
+                (45, y),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.7,
+                (255, 255, 255),
+                2,
+                cv2.LINE_AA
+            )
+
+    # confidence bar
     if confidence is not None:
         bar_max_width = 150
         bar_width = int(bar_max_width * confidence)
 
-        # background (empty bar)
-        cv2.rectangle(
-            frame,
-            (30, 120),
-            (30 + bar_max_width, 135),
-            (80, 80, 80),
-            -1
-        )
+        cv2.rectangle(frame, (30, 120), (30 + bar_max_width, 135), (80, 80, 80), -1)
+        cv2.rectangle(frame, (30, 120), (30 + bar_width, 135), conf_color, -1)
 
-        # filled portion (uses SAME confidence color)
-        cv2.rectangle(
-            frame,
-            (30, 120),
-            (30 + bar_width, 135),
-            conf_color,
-            -1
-        )
-
-    # STATE DEBUG (TOP RIGHT) 
+    # state
     if state:
         cv2.putText(
             frame,
