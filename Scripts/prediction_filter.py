@@ -15,9 +15,9 @@ class Stabilizer:
 
     def __init__(
         self,
-        maxlen=10,
+        maxlen=5,
         conf_threshold=0.6,
-        score_threshold=5.0
+        score_threshold=2.5
     ):
         """
         maxlen: size of temporal buffer

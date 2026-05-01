@@ -1,48 +1,58 @@
 class SentenceBuilder:
     """
-    Builds sentences from emitted words
+    Multi-line sentence builder with expiration
     """
 
-    def __init__(self, max_pause_frames=20):
-        self.sentence = []
+    def __init__(self, max_pause_frames=20, expiry_frames=300):
+        self.lines = []              # list of sentence lines
+        self.current_line = []      # active sentence
         self.pause_counter = 0
+        self.no_hand_counter = 0
+
         self.MAX_PAUSE = max_pause_frames
+        self.EXPIRY_FRAMES = expiry_frames  # ~10 sec @30fps
 
     def update(self, emitted_word, has_hand, actions):
-        """
-        Args:
-            emitted_word (int or None)
-            has_hand (bool)
-            actions (list of labels)
 
-        Returns:
-            finalized_sentence (str or None)
-        """
-
-        # ADD WORD 
+        # add word
         if emitted_word is not None:
             word = actions[emitted_word]
 
-            # prevent duplicates
-            if len(self.sentence) == 0 or self.sentence[-1] != word:
-                self.sentence.append(word)
+            if len(self.current_line) == 0 or self.current_line[-1] != word:
+                self.current_line.append(word)
 
-            # reset pause counter
             self.pause_counter = 0
+            self.no_hand_counter = 0
 
-        # NO HAND 
+        # no hand
         elif not has_hand:
             self.pause_counter += 1
+            self.no_hand_counter += 1
 
-            # finalize sentence after pause
+            # finalize line after pause
             if self.pause_counter >= self.MAX_PAUSE:
-                if len(self.sentence) > 0:
-                    final = " ".join(self.sentence)
-                    self.sentence.clear()
+                if len(self.current_line) > 0:
+                    line = " ".join(self.current_line)
+                    self.lines.append(line)
+                    self.current_line.clear()
                     self.pause_counter = 0
-                    return final
+
+        else:
+            self.no_hand_counter = 0
+
+        # expiry
+        if self.no_hand_counter >= self.EXPIRY_FRAMES:
+            self.lines.clear()
+            self.current_line.clear()
+            self.no_hand_counter = 0
 
         return None
 
-    def get_current_sentence(self):
-        return " ".join(self.sentence)
+    def get_display_lines(self):
+        # include active line at bottom
+        lines = self.lines.copy()
+
+        if len(self.current_line) > 0:
+            lines.append(" ".join(self.current_line))
+
+        return lines[-5:]  # show last 5 lines max
