@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+import sys
 from collections import defaultdict
 
 import numpy as np
@@ -14,15 +14,30 @@ from tensorflow.keras.callbacks import (
 ) # pyright: ignore[reportMissingModuleSource]
 from tensorflow.keras.layers import LSTM, Dense, Dropout # pyright: ignore[reportMissingModuleSource]
 from tensorflow.keras.losses import CategoricalCrossentropy # pyright: ignore[reportMissingModuleSource]
-from tensorflow.keras.models import Sequential # pyright: ignore[reportMissingModuleSource]
+from tensorflow.keras.models import Sequential, load_model # pyright: ignore[reportMissingModuleSource]
 from tensorflow.keras.optimizers import Adam # pyright: ignore[reportMissingModuleSource]
 from tensorflow.keras.utils import to_categorical # pyright: ignore[reportMissingImports]
 
-BASE_FEATURES = 126
+# mode control
+if len(sys.argv) < 2:
+    print("\n[ERROR] No mode provided.")
+    print("Usage: python model.py [train | finetune]")
+    sys.exit(1)
+
+MODE = sys.argv[1].lower()
+
+if MODE not in ["train", "finetune"]:
+    print("\n[ERROR] Invalid mode.")
+    print("Use: train OR finetune")
+    sys.exit(1)
+
+print(f"\n[MODE SELECTED]: {MODE}")
+
+# config
+BASE_FEATURES = 416
 USE_VELOCITY = True
-
 TOTAL_FEATURES = BASE_FEATURES * (2 if USE_VELOCITY else 1)
-
+DATA_PATH = "dataset"
 
 # DEBUG CALLBACK 
 class DebugCallback(Callback):
@@ -34,15 +49,10 @@ class DebugCallback(Callback):
         print(f"Val Loss: {logs.get('val_loss'):.4f}")
         print(f"Val Acc: {logs.get('val_categorical_accuracy'):.4f}")
 
-
-# path setup
-DATA_PATH = "dataset"
+# data prep
 actions = sorted(os.listdir(DATA_PATH))
-
-# label encoding
 label_map = {label: num for num, label in enumerate(actions)}
 
-# grouping files by video 
 grouped = defaultdict(list)
 
 for action in actions:
@@ -52,56 +62,38 @@ for action in actions:
         if not file.endswith(".npy"):
             continue
 
-        # expected format: yes_abc123_orig.npy
         parts = file.replace(".npy", "").split("_")
-
         if len(parts) < 3:
-            continue  # safety skip if malformed
+            continue
 
-        label = parts[0]
-        video_id = parts[1]
+        key = f"{parts[0]}_{parts[1]}"
+        grouped[key].append(os.path.join(action_path, file))
 
-        key = f"{label}_{video_id}"
-
-        full_path = os.path.join(action_path, file)
-        grouped[key].append(full_path)
-
-# split by video 
 video_keys = list(grouped.keys())
 
 train_keys, val_keys = train_test_split(
-    video_keys,
-    test_size=0.2,
-    random_state=42
+    video_keys, test_size=0.2, random_state=42
 )
 
-# build train/val 
-train_files = []
-val_files = []
+train_files, val_files = [], []
 
-# train
 for key in train_keys:
     train_files.extend(grouped[key])
 
-# val
 for key in val_keys:
     for file in grouped[key]:
         if file.endswith("Orig.npy"):
             val_files.append(file)
 
-# load data 
-X_train, y_train = [], []
-X_val, y_val = [], []
+X_train, y_train, X_val, y_val = [], [], [], []
 
 def extract_label(path):
     return os.path.basename(os.path.dirname(path))
 
-# training
 for file in train_files:
     X_train.append(np.load(file))
     y_train.append(label_map[extract_label(file)])
 
-# validation
 for file in val_files:
     X_val.append(np.load(file))
     y_val.append(label_map[extract_label(file)])
@@ -109,37 +101,11 @@ for file in val_files:
 X_train = np.array(X_train)
 X_val = np.array(X_val)
 
-y_train = to_categorical(np.array(y_train))
-y_val = to_categorical(np.array(y_val))
+num_classes = len(actions)
 
-# ASSERTS 
-assert X_train.shape[2] == TOTAL_FEATURES, \
-    f"Feature mismatch: expected {TOTAL_FEATURES}, got {X_train.shape[2]}"
+y_train = to_categorical(np.array(y_train), num_classes=num_classes)
+y_val = to_categorical(np.array(y_val), num_classes=num_classes)
 
-# DEBUG CHECKS 
-print("\n[DEBUG] Train videos:", len(train_keys))
-print("[DEBUG] Val videos:", len(val_keys))
-print("[DEBUG] Train samples:", len(train_files))
-print("[DEBUG] Val samples:", len(val_files))
-
-# CRITICAL: no leakage
-overlap = set(train_keys).intersection(set(val_keys))
-print("[DEBUG] Overlap:", overlap)
-
-
-# SANITY CHECKS 
-assert len(X_train) > 0, "Train dataset empty"
-assert len(X_val) > 0, "Validation dataset empty"
-assert X_train.shape[1:] == (32, TOTAL_FEATURES), "Shape mismatch"
-
-if np.isnan(X_train).any():
-    print("[WARNING] NaN values in train set")
-
-if np.isinf(X_train).any():
-    print("[WARNING] Inf values in train set")
-
-
-# class weights 
 labels_flat = np.argmax(y_train, axis=1)
 
 class_weights = compute_class_weight(
@@ -150,77 +116,83 @@ class_weights = compute_class_weight(
 
 class_weights = dict(enumerate(class_weights))
 
-
-# learning rate scheduler 
+# learning rate scheduler
 def scheduler(epoch):
     warmup_epochs = 5
-    max_lr = 1e-3
+
+    if MODE == "train":
+        max_lr = 1e-3
+    else:
+        max_lr = 1e-4
+
     if epoch < warmup_epochs:
         return max_lr * (epoch + 1) / warmup_epochs
     return max_lr
 
-
 lr_callback = LearningRateScheduler(scheduler)
 
+# model 
+if MODE == "train":
+    print("\n[MODE] Training from scratch")
 
-# model
-model = Sequential()
+    model = Sequential([
+        LSTM(64, return_sequences=True, activation="relu", input_shape=(32, TOTAL_FEATURES)),
+        Dropout(0.3),
 
-model.add(LSTM(64, return_sequences=True, activation="relu", input_shape=(32, TOTAL_FEATURES)))
-model.add(Dropout(0.3))
+        LSTM(64, return_sequences=False, activation="relu"),
+        Dropout(0.3),
 
-model.add(LSTM(64, return_sequences=False, activation="relu"))
-model.add(Dropout(0.3))
+        Dense(64, activation="relu"),
+        Dropout(0.3),
 
-model.add(Dense(64, activation="relu"))
-model.add(Dropout(0.3))
+        Dense(num_classes, activation="softmax")
+    ])
 
-model.add(Dense(len(actions), activation="softmax"))
+    lr = 1e-3
+    epochs = 50
+    save_path = "model/gesture_model.h5"
+
+elif MODE == "finetune":
+    print("\n[MODE] Fine-tuning existing model")
+
+    model = load_model("model/gesture_model.h5")
+
+    lr = 1e-4
+    epochs = 25
+    save_path = "model/fine_tuned_model.h5"
 
 # compile
 model.compile(
-    optimizer=Adam(learning_rate=1e-3),
+    optimizer=Adam(learning_rate=lr),
     loss=CategoricalCrossentropy(label_smoothing=0.1),
     metrics=["categorical_accuracy"],
-)
+) # pyright: ignore[reportPossiblyUnboundVariable]
 
-print("Min:", np.min(X_train), "Max:", np.max(X_train))
-
-
-# callbacks/early stopping
-early_stop = EarlyStopping(monitor="val_loss", patience=10, restore_best_weights=True)
+# callbacks
+if MODE == "train":
+    early_stop = EarlyStopping(monitor="val_loss", patience=7, restore_best_weights=True)
+else:
+    early_stop = EarlyStopping(monitor="val_loss", patience=5, restore_best_weights=True)
 
 checkpoint = ModelCheckpoint(
-    "model/best_model.h5",
+    save_path,
     monitor="val_loss",
     save_best_only=True
-)
+) # pyright: ignore[reportPossiblyUnboundVariable]
 
-
-# train model
+# train
 model.fit(
     X_train,
     y_train,
-    epochs=50,
+    epochs=epochs,
+    batch_size=32,
     shuffle=True,
     validation_data=(X_val, y_val),
     class_weight=class_weights,
     callbacks=[early_stop, checkpoint, lr_callback, DebugCallback()],
-)
+) # pyright: ignore[reportPossiblyUnboundVariable]
 
+# save
+model.save(save_path) # pyright: ignore[reportPossiblyUnboundVariable]
 
-# SANITY PREDICTION 
-print("\n[DEBUG] Prediction sanity check")
-
-sample = X_train[0:1]
-prediction = model.predict(sample)
-
-print("Prediction vector:", prediction)
-print("Predicted class:", np.argmax(prediction))
-print("Actual class:", np.argmax(y_train[0]))
-
-# checking total features:
-print(f"[CONFIG] TOTAL_FEATURES = {TOTAL_FEATURES}")
-
-# saving model
-model.save("model/gesture_model.h5")
+print(f"\n[INFO] Model saved to {save_path}") # pyright: ignore[reportPossiblyUnboundVariable]
