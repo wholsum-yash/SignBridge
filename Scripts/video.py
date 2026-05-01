@@ -4,50 +4,58 @@ from collections import deque
 import cv2
 import numpy as np
 from landmarks import get_landmarks
-from tensorflow.keras.models import load_model  # pyright: ignore[reportMissingModuleSource] 
+from tensorflow.keras.models import load_model  # pyright: ignore[reportMissingModuleSource]
 
 from prediction_filter import Stabilizer
-from state_machine import StateMachine
+from state_machine import StateMachine 
 from sentence_builder import SentenceBuilder
 from UI_UX import draw_ui 
+from tts import TTS
+tts = TTS()
+
+
+def add_velocity(sequence):
+    velocity = np.diff(sequence, axis=0)
+    velocity = np.vstack([np.zeros_like(velocity[0]), velocity])
+    return np.concatenate([sequence, velocity], axis=1)
+
 
 def is_no_hand_sequence(sequence, threshold=0.6):
-    zero_frames = sum(np.all(frame == 0) for frame in sequence)
+    zero_frames = sum(np.all(frame[:416] == 0) for frame in sequence)
     return (zero_frames / len(sequence) >= threshold)
 
 
-# loading model
-model = load_model("model/best_model.h5")
+# load model
+model = load_model("model/fine_tuned_model.h5")
 
-# labels
-DATA_PATH = "dataset"
-actions = sorted(os.listdir(DATA_PATH))
+data_path = "dataset"
+actions = sorted(os.listdir(data_path))
 
-# buffers
 sequence = deque(maxlen=32)
 
-# display hold
 display_word = None
 display_timer = 0
-DISPLAY_FRAMES = 6  #  for words to be snappy on screen
+display_frames = 6
 
-confidence = 0.0 # pre-defined to prevent crashes
+confidence = 0.0
 
-# prediction_filter module
+last_emitted = None
+
+# modules 
 stabilizer = Stabilizer(
-    maxlen=10,
+    maxlen=5,
     conf_threshold=0.6,
-    score_threshold=4.0
+    score_threshold=2.5
 )
 
-state_machine = StateMachine(cooldown_frames=15)
-sentence_builder = SentenceBuilder(max_pause_frames=20)
+state_machine = StateMachine(cooldown_frames=8)
+sentence_builder = SentenceBuilder(max_pause_frames=20, expiry_frames=300)
 
-# video input
+# camera setup
 cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 
 if not cap.isOpened():
-    print("Camera still not accessible")
+    print("camera not accessible")
     exit()
 
 while True:
@@ -55,7 +63,6 @@ while True:
     if not ret:
         break
 
-    # extracting landmarks
     landmarks = get_landmarks(frame)
 
     if landmarks is not None:
@@ -64,62 +71,76 @@ while True:
     if len(sequence) == 32:
 
         seq_array = np.array(sequence)
+        seq_array = add_velocity(seq_array)
 
         no_hand = is_no_hand_sequence(seq_array)
 
         if no_hand:
             stabilizer.reset()
+            last_emitted = None
         else:
             res = model.predict(np.expand_dims(seq_array, axis=0))[0]
 
             confidence = float(np.max(res))
             pred = int(np.argmax(res))
 
-            if confidence >= 0.75:
+            print("raw:", actions[pred], confidence)
+
+            if confidence >= 0.6:
                 stabilizer.update(pred, confidence)
+            else:
+                stabilizer.update(None, 0.0)
 
         final_pred = stabilizer.get_output()
 
-        # STATE MACHINE
         has_hand = not no_hand
         emitted = state_machine.update(has_hand, final_pred)
 
-        # SENTENCE BUILDER 
-        final_sentence = sentence_builder.update(emitted, has_hand, actions)
-        current_sentence = sentence_builder.get_current_sentence()
+        sentence_builder.update(emitted, has_hand, actions)
+        current_lines = sentence_builder.get_display_lines()
 
-        if final_sentence is not None:
-            print(f"SENTENCE: {final_sentence}")
-
-        # WORD DISPLAY 
+        # emission control 
         if emitted is not None:
-            print(f"FINAL: {actions[emitted]}")
-            display_word = actions[emitted]
-            display_timer = DISPLAY_FRAMES
 
-        # reduce timer (snappy persistence)
+            if emitted == last_emitted:
+                emitted = None
+            else:
+                last_emitted = emitted
+
+                word = actions[emitted]
+
+                print(f"final: {actions[emitted]}")
+                display_word = actions[emitted]
+                display_timer = display_frames
+
+                # adding tts
+                tts.speak(word)
+
+                sequence.clear()
+                stabilizer.reset()
+
         if display_timer > 0:
             display_timer -= 1
         else:
             display_word = None
 
     else:
-        current_sentence = ""
+        current_lines = []
 
-    # UI RENDER (ONLY PLACE FOR VISUALS) 
+    # ui 
     frame = draw_ui(
         frame,
         display_word,
-        current_sentence,
+        current_lines,
         confidence,
         state_machine.get_state()
     )
 
-    cv2.imshow("SignBridge Demo", frame)
+    cv2.imshow("signbridge demo", frame)
 
-    if cv2.waitKey(10) & 0xFF == ord("q"):
+    if cv2.waitKey(10) & 0xff == ord("q"):
         break
 
-# CLEANUP 
+# cleanup
 cap.release()
 cv2.destroyAllWindows()
